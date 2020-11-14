@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import PrivateRoute from "./components/PrivateRoute";
+import { Route } from "react-router-dom";
+import Admin from "./components/Admin";
+import Volunteer from "./components/Volunteer";
+import Student from "./components/Student";
+import LogIn from "./components/LogIn";
 
-function App() {
+const App = () => {
+  const loggedInType = "admin";
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Route exact path="/" component={LogIn} />
+      <PrivateRoute
+        exact
+        path="/admin"
+        userType={"admin"}
+        loggedInType={loggedInType}
+        component={Admin}
+      />
+      <PrivateRoute
+        exact
+        path="/volunteer"
+        userType={"volunteer"}
+        loggedInType={loggedInType}
+        component={Volunteer}
+      />
+      <PrivateRoute
+        exact
+        path="/student"
+        userType={"student"}
+        loggedInType={loggedInType}
+        component={Student}
+      />
     </div>
   );
-}
+};
 
 export default App;
