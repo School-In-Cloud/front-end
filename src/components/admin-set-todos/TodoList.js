@@ -1,13 +1,23 @@
 import React from 'react'
 import Todo from './Todo'
+import TodoForm from './TodoForm';
+import {connect} from 'react-redux'
 
 const TodoList = ({todos}) => {
-
+    
     return (
-        <ul>
-            {todos.map((elem, idx) => <Todo key={idx}  todo={elem} />)}
-        </ul>
+        <div className='container'>
+            <TodoForm/>
+            {todos.todos.map(todo => <Todo key={todo.id} todo={todo}/>)}
+        </div>
     )
 }
 
-export default TodoList
+const mapStateToProps = state => {
+    const {todos} = state
+    return {
+        todos
+    }
+}
+
+export default connect(mapStateToProps, {})(TodoList)

@@ -1,33 +1,39 @@
-import React, {useState} from 'react'
+import React, { useState } from "react";
+import { addTodo } from "../../redux-store/actions/todoActions";
+import { connect } from "react-redux";
 
-const TodoForm = ({addTodo}) => {
+const TodoForm = ({ addTodo }) => {
+  const [todo, setTodo] = useState("");
 
-    const [todo, setTodo] = useState({
-        task: '',
-        completed: false
-    })
+  const inputChange = (e) => setTodo(e.target.value);
 
-    const inputChange = e => setTodo({...todo, task: e.target.value})
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addTodo(todo);
+    setTodo("");
+  };
 
-    const handleSubmit = e => {
-        e.preventDefault()
-        if(todo.task.trim()) {
-            addTodo(todo)
-            setTodo({...todo, task: ''})
-        }
-    }
+  return (
+    <form className="add-task-form" onSubmit={handleSubmit}>
+      <input
+        className="add-task"
+        name="task"
+        value={todo}
+        type="text"
+        placeholder='Add new task...'
+        onChange={inputChange}
+      />
+      <button type="submit" className="add-task-btn">
+        <i class="fas fa-plus"></i>
+      </button>
+    </form>
+  );
+};
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <input
-                name='task'
-                type='text'
-                value={todo.task}
-                onChange={inputChange}
-            />
-            <button type='submit'>Add</button>
-        </form>
-    )
-}
+const matchDispatchToProps = (dispatch) => {
+  return {
+    addTodo: (todo) => dispatch(addTodo(todo)),
+  };
+};
 
-export default TodoForm
+export default connect(null, matchDispatchToProps)(TodoForm);
