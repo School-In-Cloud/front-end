@@ -16,7 +16,7 @@ const PrivateRoute = ({
         if (isLoggedIn && userType === loggedInType) {
           return <Component />;
         }
-        return <Redirect to="/" />;
+        return <Redirect to="/signup-login" />;
       }}
     ></Route>
   );

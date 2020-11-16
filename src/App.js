@@ -3,16 +3,19 @@ import { Route } from "react-router-dom";
 import Admin from "./components/Admin";
 import Volunteer from "./components/Volunteer";
 import Student from "./components/Student";
-import LogInForm from "./components/LogInForm";
-import RegistrationForm from "./components/RegistrationForm"
+
+import Home from './components/Home'
+import SignupAndLogin from "./components/SignupAndLogin";
+import Navbar from './components/Navbar'
 
 const App = () => {
-  const loggedInType = "admin";
+  const loggedInType = 1;
   return (
     <div>
-      <Route exact path="/" component={LogInForm} />
+      <Navbar/>
+      <Route exact path="/" component={Home} />
       <br></br>
-      <Route exact path="/" component={RegistrationForm} />
+      <Route exact path="/signup-login" component={SignupAndLogin} />
       <PrivateRoute
         exact
         path="/admin"
