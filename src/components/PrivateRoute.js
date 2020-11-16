@@ -7,7 +7,7 @@ const PrivateRoute = ({
   loggedInType,
   ...rest
 }) => {
-  const isLoggedIn = true; //localStorage.getItem('token') ? true : false
+  const isLoggedIn = true; //localStorage.getItem('token')
 
   return (
     <Route
