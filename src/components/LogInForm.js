@@ -1,8 +1,9 @@
 import {useState} from 'react'
 import * as yup from 'yup'
 import LoginFormSchema from '../Validation/LoginFormSchema'
-
-const LogInForm = () => {
+import {connect} from 'react-redux'
+import {userSignIn} from '../redux-store/actions/userActions'
+const LogInForm = ({userSignIn}) => {
     const [formData,setFormData] = useState({
         username:'',
         password:'',
@@ -39,9 +40,18 @@ const LogInForm = () => {
         const { name, value } = evt.target;
         inputChange(name, value);
     }
+
+    const onSubmit = (e) => {
+        e.preventDefault()
+        const newLogin = {
+            username: formData.username.trim(),
+            password: formData.password.trim()
+        }
+        userSignIn(newLogin)
+    }
     
     return (
-        <form>
+        <form onSubmit={onSubmit}>
         <div>
             Login 
          
@@ -69,6 +79,11 @@ const LogInForm = () => {
     </form>
     )}
     
+const matchStateToProps = dispatch => {
+    return {
+        userSignIn: user => dispatch(userSignIn(user))
+    }
+}
 
-
-export default LogInForm
+export default connect(null, matchStateToProps)(LogInForm
+)

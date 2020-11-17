@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 import RegistrationFormSchema from "../Validation/RegistrationFormSchema";
-
+import {registerUser} from '../redux-store/actions/userActions'
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -60,8 +60,19 @@ const RegistrationForm = () => {
     const correctValue = type === "checkbox" ? checked : value;
     inputChange(name, correctValue);
   };
+
+  const onSubmit = e => {
+    e.preventDefault()
+    const newUser = {
+      username: formData.name.trim(),
+      password: formData.password.trim(),
+      user_type: formData.role,
+      country: formData.country.trim()
+    }
+    registerUser(newUser)
+  }
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <div className="errors">
         <div>{formErrors.name}</div>
         <div>{formErrors.email}</div>
@@ -188,4 +199,7 @@ const RegistrationForm = () => {
     </form>
   );
 };
-export default RegistrationForm;
+
+
+
+export default  RegistrationForm;
