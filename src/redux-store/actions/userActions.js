@@ -2,7 +2,9 @@ import axios from "axios";
 export const FETCH_USER_START = "FETCH_USER_START";
 export const FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS";
 
+
 export const registerUser = (user) => {
+  
   axios
     .post(
       "https://school-in-cloud-lambda.herokuapp.com/api/auth/register",
@@ -16,7 +18,7 @@ export const registerUser = (user) => {
     });
 };
 
-export const userSignIn = (userLogin) => {
+export const userSignIn = (userLogin, history) => {
     return (dispatch) => {
         dispatch({type: FETCH_USER_START})
         axios.post(
@@ -24,7 +26,9 @@ export const userSignIn = (userLogin) => {
             userLogin
           ).then(res => {
               localStorage.setItem('token', res.data.token)
+              localStorage.setItem('userType', res.data.usertype)
               dispatch({type: FETCH_USER_SUCCESS, payload: res.data.usertype})
           })
+          .catch(err => console.log(err))
     }
 };

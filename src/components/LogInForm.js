@@ -3,7 +3,9 @@ import * as yup from 'yup'
 import LoginFormSchema from '../Validation/LoginFormSchema'
 import {connect} from 'react-redux'
 import {userSignIn} from '../redux-store/actions/userActions'
-const LogInForm = ({userSignIn}) => {
+import {useHistory} from 'react-router-dom'
+const LogInForm = (props) => {
+    const history = useHistory()
     const [formData,setFormData] = useState({
         username:'',
         password:'',
@@ -47,7 +49,8 @@ const LogInForm = ({userSignIn}) => {
             username: formData.username.trim(),
             password: formData.password.trim()
         }
-        userSignIn(newLogin)
+        props.userSignIn(newLogin)
+        history.push(`${localStorage.getItem('userType')}`)
     }
     
     return (
