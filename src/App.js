@@ -9,7 +9,6 @@ import SignupAndLogin from "./components/SignupAndLogin";
 import Navbar from './components/Navbar'
 
 const App = () => {
-  const loggedInType = 1;
   return (
     <div>
       <Navbar/>
@@ -19,22 +18,19 @@ const App = () => {
       <PrivateRoute
         exact
         path="/admin"
-        userType={1}
-        loggedInType={loggedInType}
+        componentType={'admin'}
         component={Admin}
       />
       <PrivateRoute
         exact
         path="/volunteer"
-        userType={3}
-        loggedInType={loggedInType}
+        componentType={'volunteer'}
         component={Volunteer}
       />
       <PrivateRoute
         exact
         path="/student"
-        userType={2}
-        loggedInType={loggedInType}
+        componentType={'student'}
         component={Student}
       />
     </div>

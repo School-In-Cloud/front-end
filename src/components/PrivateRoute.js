@@ -1,19 +1,21 @@
 import { Route, Redirect } from "react-router-dom";
 import React from "react";
+import {connect} from 'react-redux'
+
 
 const PrivateRoute = ({
   component: Component,
   userType,
-  loggedInType,
+  componentType,
   ...rest
 }) => {
-  const isLoggedIn = true; //localStorage.getItem('token')
-
+  const isLoggedIn = localStorage.getItem('token')
+  console.log(userType, isLoggedIn)
   return (
     <Route
       {...rest}
       render={() => {
-        if (isLoggedIn && userType === loggedInType) {
+        if (isLoggedIn && userType === componentType) {
           return <Component />;
         }
         return <Redirect to="/signup-login" />;
@@ -22,4 +24,11 @@ const PrivateRoute = ({
   );
 };
 
-export default PrivateRoute;
+const matchStateToProps = state => {
+  const {userType} = state.userType
+  return {
+    userType
+  }
+}
+
+export default connect(matchStateToProps,{})(PrivateRoute);
