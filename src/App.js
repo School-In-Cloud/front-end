@@ -4,7 +4,7 @@ import Admin from "./components/Admin";
 import Volunteer from "./components/Volunteer";
 import Student from "./components/Student";
 
-import Home from './components/Home'
+
 import SignupAndLogin from "./components/SignupAndLogin";
 import Navbar from './components/Navbar'
 
