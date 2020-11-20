@@ -1,31 +1,21 @@
-import {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import VolunteersList from './VolunteersList'
+import { axiosWithAuth } from '../axios/axios.utills'
 
-//needs to be able to search by country and days
 const Student = () => {
-    const [formData,setFormData] = useState({
-        countrySearch:'',
-        daySearch:''
-    })
+    const [volunteerList, setValunteerList] = useState([])
+    useEffect(() => {
+        axiosWithAuth()
+        .get('/api/users/volunteers')
+        .then(res => {
+            setValunteerList(res.data)
+        })
+    }, [])
     return (
-        <div>
-            Student
-            <form>
-                <label>
-                    Search by country
-                    <input
-                    name='countrySearch'
-                    type='text'
-                    ></input>
-                </label>
-
-                <label>
-                    Search by day of the week
-                    <input
-                    name='daySearch'
-                    type='text'
-                    ></input>
-                </label>
-            </form>
+        <div className='container'>
+            <div className="volunteer-grid">
+             {volunteerList.map(person => <VolunteersList key={person.available} person={person}/>)}
+            </div>
         </div>
     )
 }

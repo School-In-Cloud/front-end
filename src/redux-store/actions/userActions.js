@@ -18,7 +18,7 @@ export const registerUser = (user) => {
     });
 };
 
-export const userSignIn = (userLogin, history) => {
+export const userSignIn = (userLogin) => {
     return (dispatch) => {
         dispatch({type: FETCH_USER_START})
         axios.post(
@@ -27,7 +27,7 @@ export const userSignIn = (userLogin, history) => {
           ).then(res => {
               localStorage.setItem('token', res.data.token)
               localStorage.setItem('userType', res.data.usertype)
-              dispatch({type: FETCH_USER_SUCCESS, payload: res.data.usertype})
+              dispatch({type: FETCH_USER_SUCCESS, token: res.data.token, userType: res.data.usertype})
           })
           .catch(err => console.log(err))
     }
