@@ -1,14 +1,23 @@
+import UpdateTodo from './admin-set-todos/UpdateTodo'
 import TodoList from "./admin-set-todos/TodoList";
+import {connect} from 'react-redux'
 
-//needs to be able to create to-do lists for people
-const Admin = () => {
+const Admin = ({isEdit}) => {
 
   return (
-    <div>
-      Admin
+    <div className='container'>
+      <h1>Admin</h1>
+      {isEdit ? <UpdateTodo/> : ''}
       <TodoList/>
     </div>
   );
 };
 
-export default Admin;
+const mapStateToProps = state => {
+  const {isEdit} = state.todos
+  return {
+    isEdit
+  }
+}
+
+export default connect(mapStateToProps, {})(Admin);

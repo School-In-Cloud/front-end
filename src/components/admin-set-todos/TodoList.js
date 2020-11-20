@@ -1,10 +1,16 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Todo from './Todo'
 import TodoForm from './TodoForm';
 import {connect} from 'react-redux'
 
-const TodoList = ({todos}) => {
+import {getTodos} from "../../redux-store/actions/todoActions"
+
+const TodoList = ({todos, getTodos}) => {
     
+    useEffect(() => {
+        getTodos();
+    }, [])
+
     return (
         <div className='container'>
             <TodoForm/>
@@ -20,4 +26,10 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {})(TodoList)
+const mapDispatchToProps = dispatch => {
+    return {
+        getTodos: () => dispatch(getTodos())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
