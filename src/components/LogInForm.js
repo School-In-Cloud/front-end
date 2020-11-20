@@ -1,6 +1,8 @@
 import {useState} from 'react'
 import * as yup from 'yup'
 import LoginFormSchema from '../Validation/LoginFormSchema'
+import { StyledLogin } from '../Styling/StyledComponents'
+
 
 const LogInForm = () => {
     const [formData,setFormData] = useState({
@@ -41,15 +43,16 @@ const LogInForm = () => {
     }
     
     return (
-        <form>
+        <StyledLogin>
         <div>
             Login 
          
         </div>
         <label>
-            Username
+           
             <input
             name='username'
+            placeholder='Username'
             type='text'
             onChange={onChange}
             value={formData.email}
@@ -57,16 +60,17 @@ const LogInForm = () => {
         </label>
         
         <label>
-            Password
+          
             <input
             name='password'
+            placeholder='Password'
             type='password'
             onChange={onChange}
             value={formData.password}
             ></input>
-        <button>Login</button>
         </label>
-    </form>
+        <button>Login</button>
+    </StyledLogin>
     )}
     
 

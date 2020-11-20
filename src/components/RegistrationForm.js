@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 import RegistrationFormSchema from "../Validation/RegistrationFormSchema";
+import {StyledForm, StyledErrors} from "../Styling/StyledComponents"
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -63,40 +64,42 @@ const RegistrationForm = () => {
   return (
     <form>
       <div className="errors">
+        <StyledErrors>
         <div>{formErrors.name}</div>
         <div>{formErrors.email}</div>
         <div>{formErrors.password}</div>
         <div>{formErrors.role}</div>
         <div>{formErrors.country}</div>
+      </StyledErrors>
       </div>
-      <div>
+      <StyledForm>
         Registration
         <label>
-          Name
+         
           <input
             name="name"
             type="text"
-            placeholder="Please enter your name"
+            placeholder="Name"
             onChange={onChange}
             value={formData.name}
           ></input>
         </label>
         <label>
-          Email
+        
           <input
             name="email"
             type="text"
-            placeholder="Please enter a valid Email address"
+            placeholder="Email address"
             onChange={onChange}
             value={formData.email}
           ></input>
         </label>
         <label>
-          Desired password
+        
           <input
             name="password"
             type="password"
-            placeholder="Please enter a desired password"
+            placeholder="Password"
             onChange={onChange}
             value={formData.password}
           ></input>
@@ -110,8 +113,9 @@ const RegistrationForm = () => {
             <option value="admin">Admin</option>
           </select>
         </label>
-       <h1>Days available</h1> 
+       <p>Days available</p> 
         <label>
+          
           Monday
           <input
             type="checkbox"
@@ -175,16 +179,17 @@ const RegistrationForm = () => {
           ></input>
         </label>
         <label>
-          Country
+          
           <input
             name="country"
+            placeholder="Country"
             type="text"
             onChange={onChange}
             value={formData.country}
           ></input>
         </label>
-      </div>
       <button>Register</button>
+      </StyledForm>
     </form>
   );
 };

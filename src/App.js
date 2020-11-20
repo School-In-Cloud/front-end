@@ -4,7 +4,6 @@ import Admin from "./components/Admin";
 import Volunteer from "./components/Volunteer";
 import Student from "./components/Student";
 
-import Home from './components/Home'
 import SignupAndLogin from "./components/SignupAndLogin";
 import Navbar from './components/Navbar'
 
@@ -13,9 +12,8 @@ const App = () => {
   return (
     <div>
       <Navbar/>
-      <Route exact path="/" component={Home} />
-      <br></br>
-      <Route exact path="/signup-login" component={SignupAndLogin} />
+
+      <Route exact path="/" component={SignupAndLogin} />
       <PrivateRoute
         exact
         path="/admin"
