@@ -19,7 +19,7 @@ const PrivateRoute = ({
         if (token && componentType === userType || localToken && componentType === localUser) {
           return <Component />;
         }
-        return <Redirect to="/signup-login" />;
+        return <Redirect to="/" />;
       }}
     ></Route>
   );
