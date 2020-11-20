@@ -6,7 +6,7 @@ const Admin = ({isEdit}) => {
 
   return (
     <div className='container'>
-      <h1>Admin</h1>
+      <h1 className='header'>Admin</h1>
       {isEdit ? <UpdateTodo/> : ''}
       <TodoList/>
     </div>

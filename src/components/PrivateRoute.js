@@ -10,13 +10,12 @@ const PrivateRoute = ({
   token,
   ...rest
 }) => {
-  const localToken = localStorage.getItem('token')
-  const localUser = localStorage.getItem('userType')
+  
   return (
     <Route
       {...rest}
       render={() => {
-        if (token && componentType === userType || localToken && componentType === localUser) {
+        if (token && componentType === userType) {
           return <Component />;
         }
         return <Redirect to="/" />;

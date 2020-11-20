@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 import RegistrationFormSchema from "../Validation/RegistrationFormSchema";
-import {registerUser} from '../redux-store/actions/userActions'
+import { registerUser } from "../redux-store/actions/userActions";
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     role: "",
-    monday: false,
-    tuesday: false,
-    wednesday: false,
-    thursday: false,
-    friday: false,
-    saturday: false,
-    sunday: false,
     country: "",
   });
 
@@ -61,16 +54,23 @@ const RegistrationForm = () => {
     inputChange(name, correctValue);
   };
 
-  const onSubmit = e => {
-    e.preventDefault()
+  const onSubmit = (e) => {
+    e.preventDefault();
     const newUser = {
       username: formData.name.trim(),
       password: formData.password.trim(),
       user_type: formData.role,
-      country: formData.country.trim()
-    }
-    registerUser(newUser)
-  }
+      country: formData.country.trim(),
+    };
+    registerUser(newUser);
+    setFormData({
+      name: "",
+      email: "",
+      password: "",
+      role: "",
+      country: "",
+    });
+  };
   return (
     <form onSubmit={onSubmit}>
       <div className="errors">
@@ -80,20 +80,20 @@ const RegistrationForm = () => {
         <div>{formErrors.role}</div>
         <div>{formErrors.country}</div>
       </div>
-      <div>
-        Registration
+      <div className="registration">
+        <h2 className="form-header">Register Now</h2>
         <label>
-          Name
+          <i className="fas fa-user"></i>
           <input
             name="name"
             type="text"
-            placeholder="Please enter your name"
+            placeholder="Username"
             onChange={onChange}
             value={formData.name}
           ></input>
         </label>
         <label>
-          Email
+          <i className="fas fa-envelope"></i>
           <input
             name="email"
             type="text"
@@ -103,7 +103,7 @@ const RegistrationForm = () => {
           ></input>
         </label>
         <label>
-          Desired password
+          <i className="fas fa-key"></i>
           <input
             name="password"
             type="password"
@@ -113,7 +113,7 @@ const RegistrationForm = () => {
           ></input>
         </label>
         <label>
-          Role
+          <i className="fab fa-redhat"></i>
           <select name="role" onChange={onChange} value={formData.role}>
             <option value="">-Select a role-</option>
             <option value="student">Student</option>
@@ -121,85 +121,20 @@ const RegistrationForm = () => {
             <option value="admin">Admin</option>
           </select>
         </label>
-       <h1>Days available</h1> 
         <label>
-          Monday
-          <input
-            type="checkbox"
-            name="monday"
-            onChange={onChange}
-            checked={formData.monday}
-          ></input>
-        </label>
-        <label>
-          Tuesday
-          <input
-            type="checkbox"
-            name="tuesday"
-            onChange={onChange}
-            checked={formData.tuesday}
-          ></input>
-        </label>
-        <label>
-          Wednesday
-          <input
-            type="checkbox"
-            name="wednesday"
-            onChange={onChange}
-            checked={formData.wednesday}
-          ></input>
-        </label>
-        <label>
-          Thursday
-          <input
-            type="checkbox"
-            name="thursday"
-            onChange={onChange}
-            checked={formData.thursday}
-          ></input>
-        </label>
-        <label>
-          Friday
-          <input
-            type="checkbox"
-            name="friday"
-            onChange={onChange}
-            checked={formData.friday}
-          ></input>
-        </label>
-        <label>
-          Saturday
-          <input
-            type="checkbox"
-            name="saturday"
-            onChange={onChange}
-            checked={formData.saturday}
-          ></input>
-        </label>
-        <label>
-          Sunday
-          <input
-            type="checkbox"
-            name="sunday"
-            onChange={onChange}
-            checked={formData.sunday}
-          ></input>
-        </label>
-        <label>
-          Country
+          <i className="fas fa-globe-americas"></i>
           <input
             name="country"
             type="text"
             onChange={onChange}
             value={formData.country}
+            placeholder="Please add your country"
           ></input>
         </label>
       </div>
-      <button>Register</button>
+      <button className="btn">Register</button>
     </form>
   );
 };
 
-
-
-export default  RegistrationForm;
+export default RegistrationForm;

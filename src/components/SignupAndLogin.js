@@ -6,8 +6,11 @@ import LogInForm from './LogInForm'
 function SignupAndLogin() {
     return (
         <div>
+        <h1 className="header">Welcome to school in the cloud</h1>
+        <div className='container form-cont'>
            <RegistrationForm/>
            <LogInForm/>
+        </div>
         </div>
     )
 }

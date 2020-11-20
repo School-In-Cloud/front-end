@@ -13,6 +13,7 @@ const Student = () => {
     }, [])
     return (
         <div className='container'>
+            <h1 className='header'> Student</h1>
             <div className="volunteer-grid">
              {volunteerList.map(person => <VolunteersList key={person.available} person={person}/>)}
             </div>

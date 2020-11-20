@@ -4,8 +4,8 @@ import LoginFormSchema from "../Validation/LoginFormSchema";
 import { connect } from "react-redux";
 import { userSignIn } from "../redux-store/actions/userActions";
 import { useHistory } from "react-router-dom";
-const LogInForm = ({ userType, userSignIn }) => {
-    const history = useHistory()
+const LogInForm = ({ userSignIn }) => {
+  const history = useHistory();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -49,33 +49,40 @@ const LogInForm = ({ userType, userSignIn }) => {
       password: formData.password.trim(),
     };
     userSignIn(newLogin);
+    setFormData({
+      username: "",
+      password: "",
+    });
   };
 
   return (
     <>
-      {userType ? <button onClick={() => history.push(`/${userType}`)}>take me to {userType}</button> : ""}
       <form onSubmit={onSubmit}>
-        <div>Login</div>
-        <label>
-          Username
-          <input
-            name="username"
-            type="text"
-            onChange={onChange}
-            value={formData.email}
-          ></input>
-        </label>
+        <h2 className="form-header">Please Login</h2>
+        <div className="registration">
+          <label>
+            <i className="fas fa-user"></i>
+            <input
+              name="username"
+              type="text"
+              onChange={onChange}
+              value={formData.email}
+              placeholder="Username"
+            ></input>
+          </label>
 
-        <label>
-          Password
-          <input
-            name="password"
-            type="password"
-            onChange={onChange}
-            value={formData.password}
-          ></input>
-          <button>Login</button>
-        </label>
+          <label>
+            <i className="fas fa-key"></i>
+            <input
+              name="password"
+              type="password"
+              onChange={onChange}
+              value={formData.password}
+              placeholder="Password"
+            ></input>
+          </label>
+          <button className="btn">Login</button>
+        </div>
       </form>
     </>
   );
@@ -87,11 +94,5 @@ const matchStateToProps = (dispatch) => {
   };
 };
 
-const mapStateToProps = (state) => {
-  const { userType } = state.userType;
-  return {
-    userType,
-  };
-};
 
-export default connect(mapStateToProps, matchStateToProps)(LogInForm);
+export default connect(null, matchStateToProps)(LogInForm);

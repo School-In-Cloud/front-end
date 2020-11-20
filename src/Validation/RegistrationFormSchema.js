@@ -22,15 +22,6 @@ export default yup.object().shape({
   role: yup
     .string()
     .oneOf(["student", "volunteer", "admin"], "Please select a role"),
-    
-
-  monday:yup.boolean(),
-  tuesday:yup.boolean(),
-  wednesday:yup.boolean(),
-  thursday:yup.boolean(),
-  friday:yup.boolean(),
-  saturday:yup.boolean(),
-  sunday:yup.boolean(),
 
   country:yup
     .string()
